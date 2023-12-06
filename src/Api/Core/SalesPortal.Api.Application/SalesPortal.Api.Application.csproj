@@ -6,4 +6,15 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Features\Commands\Envanter\" />
+    <Folder Include="Features\Commands\Product\" />
+    <Folder Include="Features\Commands\SalesUnit\" />
+    <Folder Include="Features\Queries\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SalesPortal.Api.Domain\SalesPortal.Api.Domain.csproj" />
+  </ItemGroup>
+
 </Project>
