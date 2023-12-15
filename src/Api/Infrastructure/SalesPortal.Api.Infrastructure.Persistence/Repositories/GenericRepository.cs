@@ -50,10 +50,10 @@ public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEnt
         return _context.SaveChanges();
     }
 
-    public virtual Task<int> DeleteAsync(Guid id)
+    public virtual async Task<int> DeleteAsync(Guid id)
     {
-        var entity = this.entity.Find(id);
-        return DeleteAsync(entity);
+        var entity =await this.entity.FindAsync(id);
+        return await DeleteAsync(entity);
     }
 
     public virtual Task<int> DeleteAsync(TEntity entity)

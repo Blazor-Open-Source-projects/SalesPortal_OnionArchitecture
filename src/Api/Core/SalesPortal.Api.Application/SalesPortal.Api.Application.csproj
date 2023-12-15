@@ -7,13 +7,17 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Features\Commands\Envanter\" />
-    <Folder Include="Features\Commands\Product\" />
-    <Folder Include="Features\Commands\SalesUnit\" />
     <Folder Include="Features\Queries\" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="12.0.1" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
+    <PackageReference Include="MediatR" Version="12.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Common\SalesPortal.Common\SalesPortal.Common.csproj" />
     <ProjectReference Include="..\SalesPortal.Api.Domain\SalesPortal.Api.Domain.csproj" />
   </ItemGroup>
 

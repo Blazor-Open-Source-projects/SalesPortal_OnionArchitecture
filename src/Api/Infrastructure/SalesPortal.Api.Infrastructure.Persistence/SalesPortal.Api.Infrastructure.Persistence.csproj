@@ -17,6 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Common\SalesPortal.Common\SalesPortal.Common.csproj" />
     <ProjectReference Include="..\..\Core\SalesPortal.Api.Application\SalesPortal.Api.Application.csproj" />
     <ProjectReference Include="..\..\Core\SalesPortal.Api.Domain\SalesPortal.Api.Domain.csproj" />
   </ItemGroup>
