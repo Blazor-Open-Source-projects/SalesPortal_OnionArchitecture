@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace SalesPortal.Common.RequestModels;
+namespace SalesPortal.Common.Models.RequestModels;
 
 public class CreateProductCommand : IRequest<Guid>
 {

@@ -23,6 +23,7 @@ public static class Seed
                 .RuleFor(i => i.Name, i => i.Vehicle.Manufacturer())
                 .Generate(10);
 
+            var categoryIds = categories.Select(i => i.Id);
             context.Categories.AddRange(categories);
 
             var brands = new Faker<Brand>()
@@ -31,7 +32,7 @@ public static class Seed
                 .Generate(10);
 
             context.Brands.AddRange(brands);
-
+            var brandIds = brands.Select(i => i.Id);
 
 
             var companies = new Faker<Company>()
@@ -56,9 +57,21 @@ public static class Seed
                 .RuleFor(i => i.ENVCode, i => i.Internet.DomainName())
                 .RuleFor(i => i.StockQuantity, i => i.Random.Number())
                 .RuleFor(i => i.CompanyId, i => i.PickRandom(companyIds))
+                .RuleFor(i => i.BrandId, i=> i.PickRandom(brandIds))
             .Generate(100);
 
             context.Envanters.AddRange(envanters);
+
+
+            var products = new Faker<SalesProduct>()
+                .RuleFor(i => i.Id, i => Guid.NewGuid())
+                .RuleFor(i => i.CategoryId, i => i.PickRandom(categoryIds))
+                .RuleFor(i => i.Description, i => i.Random.Words())
+                .RuleFor(i => i.Price, i => i.Random.Double())
+                .RuleFor(i => i.Name, i => i.Random.Word())
+                    .Generate(200);
+
+            context.SalesProducts.AddRange(products);
 
             context.SaveChanges();
 

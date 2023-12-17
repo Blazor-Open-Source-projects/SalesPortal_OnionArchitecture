@@ -101,6 +101,9 @@ namespace SalesPortal.Api.Infrastructure.Persistence.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid>("BrandId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<Guid>("CompanyId")
                         .HasColumnType("uniqueidentifier");
 
@@ -120,6 +123,8 @@ namespace SalesPortal.Api.Infrastructure.Persistence.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("BrandId");
+
                     b.HasIndex("CompanyId");
 
                     b.ToTable("Envanters");
@@ -129,9 +134,6 @@ namespace SalesPortal.Api.Infrastructure.Persistence.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("BrandId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("CategoryId")
@@ -152,8 +154,6 @@ namespace SalesPortal.Api.Infrastructure.Persistence.Migrations
                         .HasColumnType("float");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("BrandId");
 
                     b.HasIndex("CategoryId");
 
@@ -205,30 +205,30 @@ namespace SalesPortal.Api.Infrastructure.Persistence.Migrations
 
             modelBuilder.Entity("SalesPortal.Api.Domain.Models.Envanter", b =>
                 {
+                    b.HasOne("SalesPortal.Api.Domain.Models.Brand", "Brand")
+                        .WithMany("Envanters")
+                        .HasForeignKey("BrandId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("SalesPortal.Api.Domain.Models.Company", "Company")
                         .WithMany("Envanters")
                         .HasForeignKey("CompanyId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.Navigation("Brand");
+
                     b.Navigation("Company");
                 });
 
             modelBuilder.Entity("SalesPortal.Api.Domain.Models.SalesProduct", b =>
                 {
-                    b.HasOne("SalesPortal.Api.Domain.Models.Brand", "Brand")
-                        .WithMany("Products")
-                        .HasForeignKey("BrandId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("SalesPortal.Api.Domain.Models.Category", "Category")
                         .WithMany("Products")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Brand");
 
                     b.Navigation("Category");
                 });
@@ -261,7 +261,7 @@ namespace SalesPortal.Api.Infrastructure.Persistence.Migrations
 
             modelBuilder.Entity("SalesPortal.Api.Domain.Models.Brand", b =>
                 {
-                    b.Navigation("Products");
+                    b.Navigation("Envanters");
                 });
 
             modelBuilder.Entity("SalesPortal.Api.Domain.Models.Category", b =>

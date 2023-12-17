@@ -2,7 +2,7 @@
 using MediatR;
 using SalesPortal.Api.Application.Interfaces.Repositories;
 using SalesPortal.Api.Domain.Models;
-using SalesPortal.Common.RequestModels;
+using SalesPortal.Common.Models.RequestModels;
 
 namespace SalesPortal.Api.Application.Features.Commands.Product.Create;
 

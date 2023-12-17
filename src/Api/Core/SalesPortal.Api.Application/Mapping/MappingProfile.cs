@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using SalesPortal.Api.Domain.Models;
+using SalesPortal.Common.Models.Queries;
 using SalesPortal.Common.Models.RequestModels;
-using SalesPortal.Common.RequestModels;
 
 namespace SalesPortal.Api.Application.Mapping;
 
@@ -13,5 +13,11 @@ public class MappingProfile : Profile
         CreateMap<CreateEnvanterCommand, Envanter>();
         CreateMap<CreateSalesUnitCommand, SalesUnit>();
         CreateMap<CreateProductCommand, SalesProduct>();
+
+        CreateMap<Envanter, GetEnvantersViewModel>()
+            .ForMember(p => p.BrandName, src => src.MapFrom(p => p.Brand.Name));
+
+        CreateMap<SalesProduct, GetProductViewModel>()
+            .ForMember(p => p.GetEnvanters, src => src.MapFrom(p => p.SalesUnits));
     }
 }

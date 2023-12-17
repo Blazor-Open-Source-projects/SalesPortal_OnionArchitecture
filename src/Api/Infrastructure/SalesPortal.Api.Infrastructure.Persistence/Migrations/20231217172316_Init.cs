@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace SalesPortal.Api.Infrastructure.Persistence.Migrations
 {
     /// <inheritdoc />
-    public partial class Initialize : Migration
+    public partial class Init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -64,19 +64,11 @@ namespace SalesPortal.Api.Infrastructure.Persistence.Migrations
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Price = table.Column<double>(type: "float", nullable: false),
                     CategoryId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ProductId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    BrandId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_SalesProducts", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_SalesProducts_Brands_BrandId",
-                        column: x => x.BrandId,
-                        principalTable: "Brands",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_SalesProducts_Categories_CategoryId",
                         column: x => x.CategoryId,
@@ -94,11 +86,18 @@ namespace SalesPortal.Api.Infrastructure.Persistence.Migrations
                     StockQuantity = table.Column<int>(type: "int", nullable: false),
                     ENVCode = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CompanyId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    BrandId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Envanters", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Envanters_Brands_BrandId",
+                        column: x => x.BrandId,
+                        principalTable: "Brands",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Envanters_Companies_CompanyId",
                         column: x => x.CompanyId,
@@ -154,24 +153,24 @@ namespace SalesPortal.Api.Infrastructure.Persistence.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_Envanters_BrandId",
+                table: "Envanters",
+                column: "BrandId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Envanters_CompanyId",
                 table: "Envanters",
                 column: "CompanyId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_SalesProductSalesUnit_SalesUnitsId",
-                table: "SalesProductSalesUnit",
-                column: "SalesUnitsId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_SalesProducts_BrandId",
-                table: "SalesProducts",
-                column: "BrandId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_SalesProducts_CategoryId",
                 table: "SalesProducts",
                 column: "CategoryId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_SalesProductSalesUnit_SalesUnitsId",
+                table: "SalesProductSalesUnit",
+                column: "SalesUnitsId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_SalesUnits_EnvanterId",
@@ -192,13 +191,13 @@ namespace SalesPortal.Api.Infrastructure.Persistence.Migrations
                 name: "SalesUnits");
 
             migrationBuilder.DropTable(
-                name: "Brands");
-
-            migrationBuilder.DropTable(
                 name: "Categories");
 
             migrationBuilder.DropTable(
                 name: "Envanters");
+
+            migrationBuilder.DropTable(
+                name: "Brands");
 
             migrationBuilder.DropTable(
                 name: "Companies");

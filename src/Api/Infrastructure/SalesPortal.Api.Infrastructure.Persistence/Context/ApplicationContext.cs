@@ -9,6 +9,21 @@ public class ApplicationContext : DbContext
     {
 
     }
+    public ApplicationContext()
+    {
+        
+    }
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        if (!optionsBuilder.IsConfigured)
+        {
+            var connStr = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=SalesPortal;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False";
+            optionsBuilder.UseSqlServer(connStr, opt =>
+            {
+                opt.EnableRetryOnFailure();
+            });
+        }
+    }
     public DbSet<Brand> Brands { get; set; }
     public DbSet<Category> Categories { get; set; }
     public DbSet<Company> Companies { get; set; }

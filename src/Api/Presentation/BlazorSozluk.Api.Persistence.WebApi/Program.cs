@@ -2,6 +2,7 @@ using SalesPortal.Api.Infrastructure.Persistence.Extensions;
 using SalesPortal.Api.Application.Extensions;
 using BlazorSozluk.Api.Persistence.WebApi.Infrastructure.ActionFilter;
 using SalesPortal.Api.Infrastructure.Persistence.Context;
+using BlazorSozluk.Api.Persistence.WebApi.Infrastructure.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -26,6 +27,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.ConfigureExceptionHandling(app.Environment.IsDevelopment());
 
 app.UseAuthorization();
 

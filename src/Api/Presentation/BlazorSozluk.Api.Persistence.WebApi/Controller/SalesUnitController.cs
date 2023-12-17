@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using SalesPortal.Api.Application.Features.Commands.SalesUnit.Delete;
-using SalesPortal.Common.RequestModels;
+using SalesPortal.Common.Models.RequestModels;
 
 namespace BlazorSozluk.Api.Persistence.WebApi.Controller
 {
