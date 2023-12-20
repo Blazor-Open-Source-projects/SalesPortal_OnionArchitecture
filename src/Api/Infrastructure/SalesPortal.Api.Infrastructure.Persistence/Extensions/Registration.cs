@@ -20,6 +20,7 @@ public static class Registration
         services.AddScoped<IEnvaterRepository, EnvanterRepository>();
         services.AddScoped<IProductRepository, ProductRepository>();
         services.AddScoped<ISalesUnitRepository, SalesUnitRepository>();
+        services.AddScoped<ICompanyRepository, CompanyRepository>();
 
         return services;
     }

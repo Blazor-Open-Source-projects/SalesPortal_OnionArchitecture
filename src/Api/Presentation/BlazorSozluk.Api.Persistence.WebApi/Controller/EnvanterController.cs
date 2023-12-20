@@ -7,7 +7,7 @@ namespace BlazorSozluk.Api.Persistence.WebApi.Controller
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class EnvanterController : ControllerBase
+    public class EnvanterController : BaseController
     {
         private readonly IMediator mediator;
         public EnvanterController(IMediator mediator)
@@ -18,6 +18,7 @@ namespace BlazorSozluk.Api.Persistence.WebApi.Controller
         [HttpPost]
         public async Task<IActionResult> Create(CreateEnvanterCommand command)
         {
+            command.CompanyId = CompanyId; 
             var result =await mediator.Send(command);
 
             return Ok(result);

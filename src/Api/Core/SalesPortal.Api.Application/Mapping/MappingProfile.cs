@@ -19,5 +19,8 @@ public class MappingProfile : Profile
 
         CreateMap<SalesProduct, GetProductViewModel>()
             .ForMember(p => p.GetEnvanters, src => src.MapFrom(p => p.SalesUnits));
+
+        CreateMap<CreateCompanyCommand, Company>();
+        CreateMap<Company, LoginCompanyViewModel>();
     }
 }
