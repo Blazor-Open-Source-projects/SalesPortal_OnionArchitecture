@@ -60,7 +60,7 @@ public class LoginCompanyCommandHandler : IRequestHandler<LoginCompanyCommand, L
 
     private string GenerateToken(Claim[] claims)
     {
-        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["AuthConfig:SecretKey"]));
+        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["AuthConfig:Secret"]));
         var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
         var expires = DateTime.Now.AddDays(10);
 

@@ -10,10 +10,10 @@ public class BaseController: ControllerBase
     {
         get
         {
-            var userIdString = HttpContext?.User?.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-            if (Guid.TryParse(userIdString, out var userId))
+            var companyIdString = HttpContext?.User?.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            if (Guid.TryParse(companyIdString, out var companyId))
             {
-                return userId;
+                return companyId;
             }
             return null;
         }

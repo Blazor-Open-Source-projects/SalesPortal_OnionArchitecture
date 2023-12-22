@@ -29,7 +29,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SalesPortal.Api.Infrastruct
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SalesPortal.Common", "src\Common\SalesPortal.Common\SalesPortal.Common.csproj", "{E351D40E-45CA-4D93-AAF7-228017A859B0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SalesPortal.WebApp", "SalesPortal.WebApp\SalesPortal.WebApp.csproj", "{30BEFB48-43FE-4D67-B695-F868AF495392}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SalesPortal.WebApp", "SalesPortal.WebApp\SalesPortal.WebApp.csproj", "{30BEFB48-43FE-4D67-B695-F868AF495392}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -18,7 +18,7 @@ namespace BlazorSozluk.Api.Persistence.WebApi.Controller
         [HttpPost]
         public async Task<IActionResult> Create(CreateEnvanterCommand command)
         {
-            command.CompanyId = CompanyId; 
+            command.CompanyId = CompanyId.Value; 
             var result =await mediator.Send(command);
 
             return Ok(result);
