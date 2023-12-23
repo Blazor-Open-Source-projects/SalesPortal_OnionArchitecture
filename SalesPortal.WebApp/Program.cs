@@ -25,15 +25,16 @@ builder.Services.AddScoped(sp =>
     return clientFactory.CreateClient("WebApiClient");
 });
 
-builder.Services.AddBlazoredLocalStorage();
+
 //builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 
 #region service Instances
 builder.Services.AddScoped<AuthenticationStateProvider, AuthStateProvider>();
 builder.Services.AddScoped<AuthTokenHandler>();
 builder.Services.AddScoped<IEnvanterService, EnvanterService>();
+builder.Services.AddScoped<IIdentityService, IdentityService>();
 
 #endregion
-
+builder.Services.AddBlazoredLocalStorage();
 builder.Services.AddAuthorizationCore();
 await builder.Build().RunAsync();

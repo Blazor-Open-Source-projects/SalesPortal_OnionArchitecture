@@ -1,6 +1,7 @@
 ﻿using Blazored.LocalStorage;
 using Microsoft.AspNetCore.Components.Authorization;
 using SalesPortal.WebApp.Infrastructure.Extensions;
+using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 
 namespace SalesPortal.WebApp.Infrastructure.auth;
@@ -10,7 +11,7 @@ public class AuthStateProvider : AuthenticationStateProvider
     private readonly AuthenticationState anonymous;
     private readonly ILocalStorageService localStorageService;
 
-    public AuthStateProvider(AuthenticationState state, ILocalStorageService localStorageService)
+    public AuthStateProvider(ILocalStorageService localStorageService)
     {
         this.localStorageService = localStorageService;
         anonymous = new AuthenticationState(new ClaimsPrincipal(new ClaimsIdentity()));
