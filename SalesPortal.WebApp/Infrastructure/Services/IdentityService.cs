@@ -49,7 +49,7 @@ public class IdentityService : IIdentityService
                 throw new DatabaseValidationException(responseStr);
             }
             return false;
-        }
+        }   
 
         responseStr = await httpResponse.Content.ReadAsStringAsync();
         var response = JsonSerializer.Deserialize<LoginCompanyViewModel>(responseStr);

@@ -67,7 +67,11 @@
           <div class="card-body px-4 py-5 px-md-5">
 
             <EditForm Model="loginModel" OnValidSubmit="Login">
-      
+                            @if (errorText != string.Empty)
+                            {
+                                <span class="text-danger">@errorText</span>
+                                <br />
+                            }
               <!-- Email input -->
               <div class="form-outline mb-4">
                 <input @bind-value="loginModel.EmailAddress" type="email" class="form-control" />
@@ -79,9 +83,6 @@
                 <input type="password" @bind-value="loginModel.Password" class="form-control" />
                 <label class="form-label" >Password</label>
               </div>
-
-
-
               <!-- Submit button -->
               <button type="submit" class="btn btn-primary btn-block mb-4">
                 Sign up
@@ -110,6 +111,23 @@
 
     public async Task Login()
     {
-        
+        try
+        {
+
+            var res = await identityService.Login(loginModel);
+
+            if (res)
+            {
+                errorText = "";
+                navigationManager.NavigateTo("/");
+            }
+
+
+        }
+        catch(Exception ex)
+        {
+            errorText = ex.Message;
+
+        }
     }
 }

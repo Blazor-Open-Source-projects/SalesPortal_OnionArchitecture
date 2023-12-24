@@ -37,7 +37,7 @@ public class LoginCompanyCommandHandler : IRequestHandler<LoginCompanyCommand, L
 
         if (pass != dbCompany.Password)
             throw new DatabaseValidationException("Password Is Wrong");
-        if (dbCompany.EmailConfirmed)
+        if (!dbCompany.EmailConfirmed)
             throw new DatabaseValidationException("Email Address is not confirmed Yet!");
 
         var result = mapper.Map<LoginCompanyViewModel>(dbCompany);
