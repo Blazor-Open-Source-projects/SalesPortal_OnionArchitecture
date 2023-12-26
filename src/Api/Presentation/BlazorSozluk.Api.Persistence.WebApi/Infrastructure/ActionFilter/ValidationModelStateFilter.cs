@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc.Filters;
 using SalesPortal.Common.Infrastructure.Results;
 
-namespace BlazorSozluk.Api.Persistence.WebApi.Infrastructure.ActionFilter
+namespace SalesPortal.Api.Persistence.WebApi.Infrastructure.ActionFilter
 {
     public class ValidationModelStateFilter : IAsyncActionFilter
     {

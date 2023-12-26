@@ -23,6 +23,7 @@ public class AuthStateProvider : AuthenticationStateProvider
 
         if (string.IsNullOrEmpty(apiToken))
             return anonymous;
+
         var tokenHandler = new JwtSecurityTokenHandler();
         var securityToken = tokenHandler.ReadJwtToken(apiToken);
 

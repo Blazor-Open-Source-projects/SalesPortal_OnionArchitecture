@@ -1,8 +1,8 @@
 using SalesPortal.Api.Infrastructure.Persistence.Extensions;
 using SalesPortal.Api.Application.Extensions;
-using BlazorSozluk.Api.Persistence.WebApi.Infrastructure.ActionFilter;
+using SalesPortal.Api.Persistence.WebApi.Infrastructure.ActionFilter;
 using SalesPortal.Api.Infrastructure.Persistence.Context;
-using BlazorSozluk.Api.Persistence.WebApi.Infrastructure.Extensions;
+using SalesPortal.Api.Persistence.WebApi.Infrastructure.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 

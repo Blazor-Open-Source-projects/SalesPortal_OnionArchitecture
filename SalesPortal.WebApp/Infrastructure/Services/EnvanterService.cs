@@ -2,6 +2,7 @@
 using SalesPortal.Common.Models.Queries;
 using SalesPortal.Common.Models.RequestModels;
 using SalesPortal.WebApp.Infrastructure.Services.Interfaces;
+using System.Net.Http.Json;
 
 namespace SalesPortal.WebApp.Infrastructure.Services;
 
@@ -19,13 +20,10 @@ public class EnvanterService : IEnvanterService
         throw new NotImplementedException();
     }
 
-    public Task<bool> Create(UpdateEnvanterCommand command)
-    {
-        throw new NotImplementedException();
-    }
 
-    public Task<PagedViewModel<GetEnvantersViewModel>> GetEnvaters(int page, int pageSize)
+    public async Task<PagedViewModel<GetEnvantersViewModel>> GetEnvaters(int page, int pageSize)
     {
-        throw new NotImplementedException();
+        var result =await httpClient.GetFromJsonAsync<PagedViewModel<GetEnvantersViewModel>>($"/api/Envanter?page={page}&pageSize={pageSize}");
+        return result;
     }
 }

@@ -1,0 +1,19 @@
+﻿
+
+<div class="card">
+    <h5 class="card-header">@envanterItem.Name</h5>
+    <div class="card-body">
+        <h5 class="card-title">@envanterItem.ENVCode</h5>
+        <p class="card-text">@envanterItem.BrandName  @envanterItem.StockQuantity</p>
+        <a href="#" class="btn btn-primary">Go somewhere</a>
+    </div>
+</div>
+
+@code {
+    [Inject]
+    IEnvanterService envanterService { get; set; }
+
+    [Parameter]
+    public GetEnvantersViewModel envanterItem { get; set; } 
+
+}

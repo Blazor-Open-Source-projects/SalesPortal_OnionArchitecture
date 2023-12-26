@@ -1,12 +1,14 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SalesPortal.Api.Application.Features.Queries.GetEnvanters;
 using SalesPortal.Common.Models.RequestModels;
 
-namespace BlazorSozluk.Api.Persistence.WebApi.Controller
+namespace SalesPortal.Api.Persistence.WebApi.Controller
 {
     [Route("api/[controller]")]
     [ApiController]
+    
     public class EnvanterController : BaseController
     {
         private readonly IMediator mediator;
@@ -32,11 +34,12 @@ namespace BlazorSozluk.Api.Persistence.WebApi.Controller
 
             return Ok(result);
         }
-
+       
         [HttpGet]
         public async Task<IActionResult> GetEnvanters(int page, int pageSize,Guid companyId)
         {
-           
+            if (companyId == Guid.Empty)
+                companyId = CompanyId.Value;
             var result = await mediator.Send(new GetEnvanterQuery(companyId,page,pageSize));
             return Ok(result);
         }

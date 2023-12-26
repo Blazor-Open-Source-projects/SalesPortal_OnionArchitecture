@@ -3,7 +3,7 @@ using SalesPortal.Common.Infrastructure.Exceptions;
 using SalesPortal.Common.Infrastructure.Results;
 using System.Net;
 
-namespace BlazorSozluk.Api.Persistence.WebApi.Infrastructure.Extensions;
+namespace SalesPortal.Api.Persistence.WebApi.Infrastructure.Extensions;
 
 
 public static class ApplicationBuilderExtension

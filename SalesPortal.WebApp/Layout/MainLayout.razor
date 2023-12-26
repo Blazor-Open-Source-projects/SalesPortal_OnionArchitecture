@@ -3,9 +3,19 @@
 <div class="page">
     <main>
         <div class="top-row">
+            <AuthorizeView>
+                    
+                <Authorized>
+                    <NavLink class="px-4 text-secondary">Me</NavLink>
+                    <NavLink class="px-4 text-secondary" href="logout">logout</NavLink>
+                </Authorized>
+                <NotAuthorized>
+                    <NavLink class="px-4 text-secondary" href="login">Login</NavLink>
+                    <NavLink class="px-5 text-secondary" href="register">Register</NavLink>
+                </NotAuthorized>
             
-           <NavLink class="px-4 text-secondary" href="login">Login</NavLink>
-            <NavLink class="px-5 text-secondary" href="register">Register</NavLink>
+
+            </AuthorizeView>
         </div>
 
         <article class="content px-4">

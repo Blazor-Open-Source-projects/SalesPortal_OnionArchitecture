@@ -23,7 +23,7 @@ public class GetEnvanterQueryHandler : IRequestHandler<GetEnvanterQuery, PagedVi
     {
         var query = envaterRepository.AsQueryable();
 
-        query = query.Include(i => i.Brand);
+        query = query.Include(i => i.Brand).Where(e => e.CompanyId == request.CompanyId);
 
         var list = query.Select(i => new GetEnvantersViewModel
         {

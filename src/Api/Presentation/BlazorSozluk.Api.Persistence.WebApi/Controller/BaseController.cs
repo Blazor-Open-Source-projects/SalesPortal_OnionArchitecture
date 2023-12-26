@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
-namespace BlazorSozluk.Api.Persistence.WebApi.Controller;
+namespace SalesPortal.Api.Persistence.WebApi.Controller;
 [ApiController]
 [Route("api/[Controller]")]
 public class BaseController: ControllerBase

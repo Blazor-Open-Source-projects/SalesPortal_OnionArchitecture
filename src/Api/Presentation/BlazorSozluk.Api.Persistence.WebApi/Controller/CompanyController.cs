@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using SalesPortal.Api.Application.Features.Commands.Company.Login;
 using SalesPortal.Common.Models.RequestModels;
 
-namespace BlazorSozluk.Api.Persistence.WebApi.Controller;
+namespace SalesPortal.Api.Persistence.WebApi.Controller;
 
 [ApiController]
 [Route("api/[Controller]")]
@@ -18,7 +18,7 @@ public class CompanyController : ControllerBase
 
 
     [HttpPost]
-    public async Task<ActionResult> Create(CreateCompanyCommand command)
+    public async Task<IActionResult> Create(CreateCompanyCommand command)
     {
         var result =await mediator.Send(command);
 
@@ -27,7 +27,7 @@ public class CompanyController : ControllerBase
 
 
     [HttpPost("login")]
-    public async Task<ActionResult> Login(LoginCompanyCommand command)
+    public async Task<IActionResult> Login(LoginCompanyCommand command)
     {
         var guid = await mediator.Send(command);
         return Ok(guid);

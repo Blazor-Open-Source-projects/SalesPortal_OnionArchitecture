@@ -12,12 +12,12 @@ public class AuthTokenHandler : DelegatingHandler
     {
         this.localStorageService = localStorageService;
     }
-    protected override HttpResponseMessage Send(HttpRequestMessage request, CancellationToken cancellationToken)
+    protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
     {
         var token = localStorageService.GetToken();
 
         if (!string.IsNullOrEmpty(token) && request.Headers.Authorization == null)
             request.Headers.Authorization = new AuthenticationHeaderValue("bearer", token);
-        return base.Send(request, cancellationToken);
+        return base.SendAsync(request, cancellationToken);
     }
 }

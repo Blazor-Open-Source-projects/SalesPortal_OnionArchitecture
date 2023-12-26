@@ -2,7 +2,7 @@
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
-namespace BlazorSozluk.Api.Persistence.WebApi.Infrastructure.Extensions;
+namespace SalesPortal.Api.Persistence.WebApi.Infrastructure.Extensions;
 
 public static class AuthRegistration
 {

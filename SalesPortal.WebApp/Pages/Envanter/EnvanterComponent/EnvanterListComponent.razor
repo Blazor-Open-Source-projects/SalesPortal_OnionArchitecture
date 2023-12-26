@@ -1,0 +1,34 @@
+﻿
+
+@if(envanters != null)
+{
+    @foreach(var envanterItem in envanters.Results)
+    {
+
+        <GetEnvanterComponent envanterItem="envanterItem" />
+    }
+    <br />
+    <br />
+    <br />
+    <PaginationComponent TotalPage="@envanters.PageInfo.TotalPageCount"
+                         CurrentPage="@CurrentPage"
+                         OnPageChanged="@OnPageChanged"/>
+}
+
+@code {
+    [Inject]
+    IEnvanterService envanterService { get; set; }
+    private int CurrentPage = 1;
+
+    PagedViewModel<GetEnvantersViewModel> envanters;
+
+    public async Task OnPageChanged(int pageNumber)
+    {
+        CurrentPage = pageNumber;
+        envanters = await envanterService.GetEnvaters(CurrentPage, 10);
+    }
+    protected override async Task OnInitializedAsync()
+    {
+         envanters = await envanterService.GetEnvaters(CurrentPage,10);
+    }
+}
