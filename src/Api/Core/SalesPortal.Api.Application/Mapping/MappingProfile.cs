@@ -22,5 +22,7 @@ public class MappingProfile : Profile
 
         CreateMap<CreateCompanyCommand, Company>();
         CreateMap<Company, LoginCompanyViewModel>();
+        CreateMap<Brand, GetBrandsViewModel>()
+            .ForMember(dest => dest.BrandName, src=>src.MapFrom(p=>p.Name));
     }
 }

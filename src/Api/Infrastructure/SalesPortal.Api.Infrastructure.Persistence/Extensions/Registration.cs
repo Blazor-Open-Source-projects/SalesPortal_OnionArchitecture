@@ -21,6 +21,7 @@ public static class Registration
         services.AddScoped<IProductRepository, ProductRepository>();
         services.AddScoped<ISalesUnitRepository, SalesUnitRepository>();
         services.AddScoped<ICompanyRepository, CompanyRepository>();
+        services.AddScoped<IBrandRepository, BrandRepository>();
 
         return services;
     }

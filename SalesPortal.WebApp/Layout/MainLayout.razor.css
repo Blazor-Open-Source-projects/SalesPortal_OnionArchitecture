@@ -4,6 +4,33 @@
     flex-direction: column;
 }
 
+.sub-nav {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: auto;
+    position: static;
+    bottom: 0;
+    width: 80%;
+    height: 30px;
+    display: flex;
+}
+
+
+a.sub-nav-item {
+    margin-right: 40px;
+    color: #bdbdbd;
+    bottom: 5px;
+    font-weight: bold;
+}
+
+
+    a.sub-nav-item:hover, a.sub-nav-item:active {
+        cursor: pointer;
+        color: #80be4a;
+        border-color: #80be4a;
+        border-bottom: solid;
+        transition: all .2s ease-in-out;
+    }
 main {
     flex: 1;
 }

@@ -30,7 +30,7 @@ public interface IGenericRepository<TEntity> where TEntity : BaseEntity
     IQueryable<TEntity> AsQueryable();
 
 
-    Task<List<TEntity>> GetAll(Expression<Func<TEntity, bool>> predicate, Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null, bool noTracking = true);
+    Task<List<TEntity>> GetAll(Expression<Func<TEntity, bool>>? predicate, Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null, bool noTracking = true);
 
     Task<TEntity> GetSingleAsync(Expression<Func<TEntity, bool>> predicate, bool noTracking = true, params Expression<Func<TEntity, object>>[] includes);
 

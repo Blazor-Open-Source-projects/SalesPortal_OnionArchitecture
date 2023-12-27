@@ -34,7 +34,7 @@
     [Parameter]
     public EventCallback<int> OnPageChanged { get; set; }
 
-    public async Task Changed(ChangeEventArgs e)
+    private async Task Changed(ChangeEventArgs e)
     {
         await OnPageChanged.InvokeAsync(int.Parse(e.Value.ToString()));
     }

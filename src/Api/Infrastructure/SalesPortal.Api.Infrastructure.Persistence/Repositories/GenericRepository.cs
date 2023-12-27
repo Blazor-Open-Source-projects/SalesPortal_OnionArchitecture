@@ -126,7 +126,7 @@ public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEnt
 
 
     #region GetAll Operations
-    public virtual async Task<List<TEntity>> GetAll(Expression<Func<TEntity, bool>> predicate, Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null, bool noTracking = true) { 
+    public virtual async Task<List<TEntity>> GetAll(Expression<Func<TEntity, bool>>? predicate, Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null, bool noTracking = true) { 
 
         IQueryable<TEntity> query = entity;
 

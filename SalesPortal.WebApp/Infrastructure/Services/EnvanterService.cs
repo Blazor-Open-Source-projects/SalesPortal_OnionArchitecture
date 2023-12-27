@@ -15,9 +15,16 @@ public class EnvanterService : IEnvanterService
         this.httpClient = httpClient;
     }
 
-    public Task<Guid> Create(CreateEnvanterCommand command)
+    public async Task<Guid> Create(CreateEnvanterCommand command)
     {
-        throw new NotImplementedException();
+        var result = await httpClient.PostAsJsonAsync("/api/Envanter", command); 
+        
+        if(!result.IsSuccessStatusCode)
+            return Guid.Empty;
+
+        var guidStr = await result.Content.ReadAsStringAsync();
+
+        return new Guid(guidStr.Trim('"'));
     }
 
 

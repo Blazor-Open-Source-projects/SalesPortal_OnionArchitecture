@@ -1,0 +1,19 @@
+﻿@page "/envanterlist" 
+<h3>Envanters</h3>
+<div class="position-relative"> 
+    <div class="position-absolute top-1 end-0">
+        <button type="button" class="btn btn-success" @onclick=navigate>Create</button>
+    </div>
+</div>
+<br/>
+<br />
+<EnvanterListComponent />
+@code {
+    [Inject]
+    NavigationManager navigationManager { get; set; }
+
+    public async Task navigate()
+    {
+        navigationManager.NavigateTo("/create/envanter");
+    }
+}

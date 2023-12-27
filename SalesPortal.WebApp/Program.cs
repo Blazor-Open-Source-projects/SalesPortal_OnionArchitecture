@@ -6,6 +6,7 @@ using SalesPortal.WebApp;
 using SalesPortal.WebApp.Infrastructure.auth;
 using SalesPortal.WebApp.Infrastructure.Services;
 using SalesPortal.WebApp.Infrastructure.Services.Interfaces;
+using Blazored.Modal;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");
@@ -33,8 +34,11 @@ builder.Services.AddScoped<AuthenticationStateProvider, AuthStateProvider>();
 builder.Services.AddScoped<AuthTokenHandler>();
 builder.Services.AddScoped<IEnvanterService, EnvanterService>();
 builder.Services.AddScoped<IIdentityService, IdentityService>();
+builder.Services.AddScoped<IBrandService, BrandService>();
 
 #endregion
 builder.Services.AddBlazoredLocalStorage();
+builder.Services.AddBlazoredModal();
+
 builder.Services.AddAuthorizationCore();
 await builder.Build().RunAsync();
