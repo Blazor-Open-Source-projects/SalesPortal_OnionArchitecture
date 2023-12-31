@@ -3,13 +3,13 @@
 namespace SalesPortal.Api.Application.Features.Commands.Envanter.Delete;
 public class DeleteEnvanterCommand : IRequest<bool>
 {
-    public DeleteEnvanterCommand(Guid userId, Guid companyId)
+    public DeleteEnvanterCommand(Guid envanterId, Guid companyId)
     {
-        UserId = userId;
+        EnvanterId = envanterId;
         CompanyId = companyId;
     }
 
-    public Guid UserId { get; set; }
+    public Guid EnvanterId { get; set; }
     public Guid CompanyId { get; set; }
 }
 

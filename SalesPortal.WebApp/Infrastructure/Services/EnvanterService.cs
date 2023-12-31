@@ -27,10 +27,30 @@ public class EnvanterService : IEnvanterService
         return new Guid(guidStr.Trim('"'));
     }
 
+    public async Task<bool> Delete(Guid envanterId)
+    {
+        var result = await httpClient.PostAsync($"/api/envanter/delete?envanterId={envanterId}",null);
+
+        if(!result.IsSuccessStatusCode)
+        {
+            return false;
+        }
+        return true;
+    }
 
     public async Task<PagedViewModel<GetEnvantersViewModel>> GetEnvaters(int page, int pageSize)
     {
         var result =await httpClient.GetFromJsonAsync<PagedViewModel<GetEnvantersViewModel>>($"/api/Envanter?page={page}&pageSize={pageSize}");
         return result;
+    }
+
+    public async Task<bool> Update(UpdateEnvanterCommand command)
+    {
+        var result = await httpClient.PostAsJsonAsync<UpdateEnvanterCommand>("/api/envanter/update", command);
+
+        if(!result.IsSuccessStatusCode)
+                return false;
+
+        return true;
     }
 }

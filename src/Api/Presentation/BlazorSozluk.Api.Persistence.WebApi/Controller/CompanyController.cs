@@ -1,6 +1,5 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using SalesPortal.Api.Application.Features.Commands.Company.Login;
 using SalesPortal.Common.Models.RequestModels;
 
 namespace SalesPortal.Api.Persistence.WebApi.Controller;

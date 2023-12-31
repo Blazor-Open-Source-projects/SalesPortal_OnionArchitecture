@@ -1,32 +1,54 @@
 ﻿@page "/create/envanter"
 
-<EditForm Model="envanter" OnValidSubmit="Create">
-    <div class="form-row">
-        <div class="form-group col-md-6">
-            <label for="inputEmail4">Name</label>
-            <InputText @bind-Value=envanter.Name class="form-control" placeholder="Name" />
-        </div>
-        <div class="form-group col-md-6">
-            <label for="inputPassword4">ENVCode</label>
-            <InputText @bind-Value=envanter.ENVCode class="form-control" placeholder="Envanter Code" />
-        </div>
-    </div>
-    <div class="form-group">
-        <label for="inputAddress">StockQuantity</label>
-        <InputNumber @bind-Value=envanter.StockQuantity class="form-control" id="inputAddress" />
-    </div>
-    <div class="form-group">
-        <select class="form-select" aria-label="Default select example">
-            @foreach(var brand in brands)
-            {
-                <option>@brand</option>
-            }   
-        </select>
-    </div>
+<h3 class="text-success mt-5 mb-5">Add Envanter Item</h3>
+<div class="container d-flex justify-content-center align-items-center">
+    <div>
+        <!-- Form içeriği -->
 
-   
-    <button type="submit" class="btn btn-primary">Sign in</button>
-</EditForm>
+
+    
+    <EditForm Model="envanter" OnValidSubmit="Create">
+            @if (errorText != string.Empty)
+            {
+                <span class="text-danger">@errorText</span>
+                <br />
+            }
+        <div class="form-row">
+            <div class="form-group">
+                <label for="inputEmail4">Name</label>
+                <InputText @bind-Value=envanter.Name class="form-control" placeholder="Name" />
+                <span > </span>
+            </div>
+            <div class="form-group">
+                <label for="inputPassword4">ENVCode</label>
+                <InputText @bind-Value=envanter.ENVCode class="form-control" placeholder="Envanter Code" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputAddress">StockQuantity</label>
+            <InputNumber @bind-Value=envanter.StockQuantity class="form-control" id="inputAddress" />
+        </div>
+        <div class="form-group mb-5">
+            <label>Choose Envanter Brand</label>
+            
+                @if(brands != null)
+                {
+                    <select class="form-select" @bind="envanter.BrandId" aria-label="Default select example">
+                        <option>Null</option>
+                        @foreach (var brand in brands)
+                        {
+                            <option value="@brand.Id">@brand.BrandName</option>
+                        }
+                    </select>
+                }
+        </div>
+        <button type="submit" class="px-5 btn btn-outline-success">Add</button>
+        <br />
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+    </EditForm>
+    </div>
+</div>
 @code {
     [Inject]
     NavigationManager navigationManager { get; set; }
@@ -38,11 +60,13 @@
     ILocalStorageService localStorage { get; set; }
 
     [Inject]
-    BrandService brandService { get; set; }
+    IBrandService brandService { get; set; }
 
     List<GetBrandsViewModel> brands;
 
     CreateEnvanterCommand envanter = new();
+
+    public string errorText = "";
 
     protected override async Task OnInitializedAsync()
     {
@@ -50,7 +74,17 @@
     }
     public async Task Create()
     {
-        envanter.CompanyId =await localStorage.GetCompanyId();
-        await envanterService.Create(envanter);
+        if (envanter.BrandId == Guid.Empty)
+            errorText = "You have to chosse a brand";
+
+        try
+        {
+            envanter.CompanyId =await localStorage.GetCompanyId();
+            await envanterService.Create(envanter);
+            navigationManager.NavigateTo("/envanterlist");
+        }catch(Exception ex)
+        {
+            errorText = ex.Message;
+        }
     }
 }

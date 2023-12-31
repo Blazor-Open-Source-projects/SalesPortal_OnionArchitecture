@@ -1,7 +1,10 @@
-﻿    
-
-<div class="card">
-    <h5 class="card-header">@envanterItem.Name</h5>
+﻿<div class="card mb-5">
+    <h5 class="card-header">@envanterItem.Name
+    </h5>
+    <div class="text-end">
+        <button class="btn btn btn-outline-info">update</button>
+        <button class="btn btn-outline-danger" @onclick="()=>Delete(envanterItem.Id)">Delete</button>
+    </div>
     <div class="card-body">
         <h5 class="card-title">@envanterItem.ENVCode</h5>
         <p class="card-text">@envanterItem.BrandName  @envanterItem.StockQuantity</p>
@@ -16,4 +19,9 @@
     [Parameter]
     public GetEnvantersViewModel envanterItem { get; set; } 
 
+    public async Task Delete(Guid id)
+    {
+        var result = await envanterService.Delete(id);
+        StateHasChanged();
+    }  
 }

@@ -39,13 +39,12 @@ public class IdentityService : IIdentityService
         string responseStr;
         var httpResponse =await httpClient.PostAsJsonAsync("/api/Company/login", command);
 
-        if(httpResponse != null && !httpResponse.IsSuccessStatusCode)
+        if (httpResponse != null && !httpResponse.IsSuccessStatusCode)
         {
-            if(httpResponse.StatusCode == System.Net.HttpStatusCode.BadRequest)
+            if (httpResponse.StatusCode != System.Net.HttpStatusCode.BadRequest)
             {
-                responseStr = await httpResponse.Content.ReadAsStringAsync();
-                var validation = JsonSerializer.Deserialize<ValidationResponseModel>(responseStr);
-                responseStr = validation.FlattenErrors;
+                var res  = await httpResponse.Content.ReadFromJsonAsync<ValidationResponseModel>();
+                responseStr = res.FlattenErrors;
                 throw new DatabaseValidationException(responseStr);
             }
             return false;
@@ -81,5 +80,20 @@ public class IdentityService : IIdentityService
 
         httpClient.DefaultRequestHeaders.Authorization = null;
 
+    }
+
+    public async Task<Guid> Register(CreateCompanyCommand command)
+    {
+        var res = await httpClient.PostAsJsonAsync("/api/Company", command);
+        string responseStr;
+        if (!res.IsSuccessStatusCode)
+        {
+            var response = await res.Content.ReadFromJsonAsync<ValidationResponseModel>();
+            responseStr = response.FlattenErrors;
+            throw new DatabaseValidationException(responseStr);
+        }
+        var guidStr = await res.Content.ReadAsStringAsync();
+
+        return new Guid(guidStr.Trim('"'));
     }
 }
