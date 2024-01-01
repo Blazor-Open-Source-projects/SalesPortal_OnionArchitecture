@@ -31,8 +31,8 @@ public class GetEnvanterQueryHandler : IRequestHandler<GetEnvanterQuery, PagedVi
             ENVCode = i.ENVCode,
             Name = i.Name,
             Id = i.Id,
-            StockQuantity = i.StockQuantity
-            
+            StockQuantity = i.StockQuantity,
+            brandId = i.BrandId
         });
         var result = await list.GetPagedAsync(request.Page, request.PageSize);
 

@@ -5,14 +5,15 @@
         <div class="top-row">
 
 
-            <div class="sub-nav">
-                <a class="sub-nav-item active" href="envanterlist">Envanter</a>
-                <a class="sub-nav-item ">Sales Units</a>
-                <a class="sub-nav-item ">Products</a>
-            </div>
             <AuthorizeView>
                     
                 <Authorized>
+
+                    <div class="sub-nav">
+                        <a class="sub-nav-item active" href="envanterlist">Envanter</a>
+                        <a class="sub-nav-item ">Sales Units</a>
+                        <a class="sub-nav-item ">Products</a>
+                    </div>
                     <NavLink class="px-4 text-secondary">Me</NavLink>
                     <NavLink class="px-4 text-secondary" href="logout">logout</NavLink>
                 </Authorized>

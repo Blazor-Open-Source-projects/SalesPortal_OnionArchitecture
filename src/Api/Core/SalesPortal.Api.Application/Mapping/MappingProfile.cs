@@ -12,7 +12,8 @@ public class MappingProfile : Profile
         //source --> Detination
         CreateMap<CreateEnvanterCommand, Envanter>();
         CreateMap<CreateSalesUnitCommand, SalesUnit>();
-        CreateMap<CreateProductCommand, SalesProduct>();
+        CreateMap<CreateProductCommand, SalesProduct>()
+            /*.ForMember(src => src.SalesUnits, dest=>dest.MapFrom(p=>p.SalesUnits))*/;
 
         CreateMap<Envanter, GetEnvantersViewModel>()
             .ForMember(p => p.BrandName, src => src.MapFrom(p => p.Brand.Name));
@@ -22,7 +23,9 @@ public class MappingProfile : Profile
 
         CreateMap<CreateCompanyCommand, Company>();
         CreateMap<Company, LoginCompanyViewModel>();
+
         CreateMap<Brand, GetBrandsViewModel>()
             .ForMember(dest => dest.BrandName, src=>src.MapFrom(p=>p.Name));
+        CreateMap<Category, GetCategoryViewModel>();
     }
 }

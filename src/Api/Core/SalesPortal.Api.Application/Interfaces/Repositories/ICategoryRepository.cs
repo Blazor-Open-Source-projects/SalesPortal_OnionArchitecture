@@ -2,6 +2,7 @@
 
 namespace SalesPortal.Api.Application.Interfaces.Repositories;
 
-public interface IBrandRepository : IGenericRepository<Brand>
+public interface ICategoryRepository : IGenericRepository<Category>
 {
+
 }

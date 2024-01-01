@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
 using SalesPortal.Api.Application.Interfaces.Repositories;
-using SalesPortal.Api.Domain.Models;
 using SalesPortal.Common.Infrastructure;
 using SalesPortal.Common.Infrastructure.Exceptions;
 using SalesPortal.Common.Models.RequestModels;
