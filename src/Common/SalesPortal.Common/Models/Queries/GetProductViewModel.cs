@@ -6,5 +6,5 @@ public  class GetProductViewModel
     public string Description { get; set; }
     public double Price { get; set; }
     public string  CategoryName { get; set; }
-    public List<GetEnvantersViewModel> GetEnvanters { get; set; }
+    public List<GetSalesUnitViewModel> SalesUnits { get; set; }
 }

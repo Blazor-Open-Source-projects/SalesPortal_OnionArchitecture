@@ -35,6 +35,7 @@ builder.Services.AddScoped<AuthTokenHandler>();
 builder.Services.AddScoped<IEnvanterService, EnvanterService>();
 builder.Services.AddScoped<IIdentityService, IdentityService>();
 builder.Services.AddScoped<IBrandService, BrandService>();
+builder.Services.AddScoped<IProductService, ProductService>();  
 
 #endregion
 builder.Services.AddBlazoredLocalStorage();

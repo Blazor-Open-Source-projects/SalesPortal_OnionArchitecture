@@ -1,13 +1,15 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using SalesPortal.Api.Application.Features.Commands.Product.Delete;
+using SalesPortal.Api.Application.Features.Queries.GetMainPageProducts;
+using SalesPortal.Common.Models.Queries;
 using SalesPortal.Common.Models.RequestModels;
 
 namespace SalesPortal.Api.Persistence.WebApi.Controller
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ProductController : ControllerBase
+    public class ProductController : BaseController
     {
         private readonly IMediator mediator;
 
@@ -29,6 +31,18 @@ namespace SalesPortal.Api.Persistence.WebApi.Controller
         public async Task<IActionResult> Delete(Guid? CompanyId, Guid ProductId)
         {
             var result = await mediator.Send(new DeleteProductCommand(CompanyId, ProductId));
+
+            return Ok(result);
+        }
+
+
+        [HttpGet]
+        public async Task<IActionResult> GetAllProductsByCompanyyId(int page,int pageSize,Guid companyId)
+        {
+            if (companyId == Guid.Empty)
+                companyId = CompanyId.Value;
+
+            var result = await mediator.Send(new GetProductQuery(page, pageSize, companyId));
 
             return Ok(result);
         }

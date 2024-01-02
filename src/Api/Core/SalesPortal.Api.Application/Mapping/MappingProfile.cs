@@ -19,7 +19,7 @@ public class MappingProfile : Profile
             .ForMember(p => p.BrandName, src => src.MapFrom(p => p.Brand.Name));
 
         CreateMap<SalesProduct, GetProductViewModel>()
-            .ForMember(p => p.GetEnvanters, src => src.MapFrom(p => p.SalesUnits));
+            .ForMember(p => p.SalesUnits, src => src.MapFrom(p => p.SalesUnits));
 
         CreateMap<CreateCompanyCommand, Company>();
         CreateMap<Company, LoginCompanyViewModel>();
@@ -27,5 +27,8 @@ public class MappingProfile : Profile
         CreateMap<Brand, GetBrandsViewModel>()
             .ForMember(dest => dest.BrandName, src=>src.MapFrom(p=>p.Name));
         CreateMap<Category, GetCategoryViewModel>();
+
+        CreateMap<SalesUnit, GetSalesUnitViewModel>()
+            .ForMember(dest => dest.Name, src => src.MapFrom(p => p.Envanter.Name));
     }
 }
