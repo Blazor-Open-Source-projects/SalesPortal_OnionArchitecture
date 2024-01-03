@@ -97,8 +97,8 @@ main {
         width: 0;
     }
 
-    .top-row, article {
-        padding-left: 2rem !important;
+    article {
+        padding-left: 8rem !important;
         padding-right: 1.5rem !important;
     }
 }

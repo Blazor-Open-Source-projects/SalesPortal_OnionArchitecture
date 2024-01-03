@@ -1,0 +1,76 @@
+﻿        <title>Sidebar</title>
+
+        <!--fonts-->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
+
+
+    <link rel="stylesheet" href="./sidebar/sidevar.css">
+
+    <script src="/sidebar/sidebar.js"> </script>
+  
+    <!--fontawesome-->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.3.0/css/all.css" >
+
+        <!--aside bar-->
+        <nav class="navbar">            
+            <div class="navbar-container">
+                <!--logo div-->
+                <div class="navbar-logo-div">
+                    <a class="navbar-logo-link" href="#">
+                       <i class="fas fa-shield-dog"></i>
+                    </a>
+                    <button class="navbar-toggler"><i class='fas fa-solid fa-bars'></i></button>
+                </div>
+
+                <!--search input-->
+                
+                    <input type="search" name="search" placeholder="Search..."
+                     class="navbar-search" id="search">
+              
+                    <i id='icon-search' class="fas fa-regular fa-magnifying-glass"></i>
+                 
+                <!--item list-->
+                <ul class="menu-list">   
+                    <li class="menu-item">                        
+                        <a class="menu-link" href="#"> 
+                            <i class="fas fa-solid fa-table"></i>
+                            <span class="menu-link-text">   </span>                            
+                        </a>
+                    </li>
+                    <li class="menu-item">                        
+                        <a class="menu-link" href="#">
+                            <i class="fas fa-solid fa-paw"></i>
+                            <span class="menu-link-text">Pets</span>    
+                        </a>
+                    </li>
+                    <li class="menu-item">                        
+                        <a class="menu-link" href="#">
+                            <i class="fas fa-solid fa-user"></i>
+                            <span class="menu-link-text">Customers</span>    
+                        </a>
+                    </li>
+                    <li class="menu-item">                            
+                        <a class="menu-link" href="#">
+                            <i class="fas fa-regular fa-stethoscope"></i>
+                            <span class="menu-link-text">Vets</span>    
+                        </a>
+                    </li>
+                    <li class="menu-item">                        
+                        <a class="menu-link" href="#">
+                            <i class="fas fa-duotone fa-gear"></i>
+                            <span class="menu-link-text">Settings</span>    
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+           
+        </nav>
+
+
+
+@code {
+
+}
