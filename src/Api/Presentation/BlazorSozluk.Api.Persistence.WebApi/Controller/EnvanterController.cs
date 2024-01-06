@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using SalesPortal.Api.Application.Features.Commands.Envanter.Delete;
+using SalesPortal.Api.Application.Features.Queries.GetEnvanterById;
 using SalesPortal.Api.Application.Features.Queries.GetEnvanters;
 using SalesPortal.Api.Application.Features.Queries.GetEnvantersByBrand;
 using SalesPortal.Common.Models.RequestModels;
@@ -64,6 +65,16 @@ namespace SalesPortal.Api.Persistence.WebApi.Controller
 
             var result = await mediator.Send(new GetEnvantersByBrandQuery(page,pageSize,companyId,BrandId));
             return Ok(result);
+        }
+
+        [HttpGet("{envanterId}")]
+        public async Task<IActionResult> GetEnvanterByEnvanterId(Guid envanterId, Guid companyId)
+        {
+            companyId = CompanyId.Value;
+
+            var res = await mediator.Send(new GetEnvanterByIdQuery(envanterId,companyId));
+
+            return Ok(res);
         }
     }
 }
