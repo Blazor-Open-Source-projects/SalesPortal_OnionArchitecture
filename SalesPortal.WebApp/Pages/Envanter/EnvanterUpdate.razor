@@ -1,0 +1,31 @@
+﻿@page "/envanter/{id:guid}"
+
+<EditForm Model=@envanter OnValidSubmit="Update"> 
+
+    <EnvanterCreateAndUpdateComponent envanter="envanter"
+                                      errorText="@errorText"
+                                      operationTitle="Update new envanter item"/>
+   <DataAnnotationsValidator />
+   <ValidationSummary />
+</EditForm>
+@code {
+
+    [Parameter]
+    public Guid id { get; set; }
+
+    private string errorText;
+
+    private CreateEnvanterCommand envanter = new();
+    [Inject]
+    IEnvanterService envanterService{ get; set; }
+
+    protected async override Task OnInitializedAsync()
+    {
+        envanter = await envanterService.GetEnvanter(id);
+    }
+
+    public async Task Update()
+    {
+        
+    }
+}

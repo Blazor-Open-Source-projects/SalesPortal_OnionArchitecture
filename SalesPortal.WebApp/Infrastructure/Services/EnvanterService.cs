@@ -38,6 +38,12 @@ public class EnvanterService : IEnvanterService
         return true;
     }
 
+    public async Task<CreateEnvanterCommand> GetEnvanter(Guid id)
+    {
+        var res = await httpClient.GetFromJsonAsync<CreateEnvanterCommand>($"/api/Envanter/{id}");
+        return res;
+    }
+
     public async Task<PagedViewModel<GetEnvantersViewModel>> GetEnvaters(int page, int pageSize)
     {
         var result =await httpClient.GetFromJsonAsync<PagedViewModel<GetEnvantersViewModel>>($"/api/Envanter?page={page}&pageSize={pageSize}");

@@ -10,4 +10,5 @@ public interface IEnvanterService
     Task<Guid> Create(CreateEnvanterCommand command);
     Task<bool> Delete(Guid envanterId);
     Task<PagedViewModel<GetEnvantersViewModel>> GetEnvaters(int page, int pageSize);
+    Task<CreateEnvanterCommand> GetEnvanter(Guid id);
 }

@@ -1,54 +1,13 @@
 ﻿@page "/create/envanter"
 
-<h3 class="text-success mt-5 mb-5">Add Envanter Item</h3>
-<div class="container d-flex justify-content-center align-items-center">
-    <div>
-        <!-- Form içeriği -->
-
-
-    
     <EditForm Model="envanter" OnValidSubmit="Create">
-            @if (errorText != string.Empty)
-            {
-                <span class="text-danger">@errorText</span>
-                <br />
-            }
-        <div class="form-row">
-            <div class="form-group">
-                <label for="inputEmail4">Name</label>
-                <InputText @bind-Value=envanter.Name class="form-control" placeholder="Name" />
-                <span > </span>
-            </div>
-            <div class="form-group">
-                <label for="inputPassword4">ENVCode</label>
-                <InputText @bind-Value=envanter.ENVCode class="form-control" placeholder="Envanter Code" />
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="inputAddress">StockQuantity</label>
-            <InputNumber @bind-Value=envanter.StockQuantity class="form-control" id="inputAddress" />
-        </div>
-        <div class="form-group mb-5">
-            <label>Choose Envanter Brand</label>
-            
-                @if(brands != null)
-                {
-                    <select class="form-select" @bind="envanter.BrandId" aria-label="Default select example">
-                        <option>Null</option>
-                        @foreach (var brand in brands)
-                        {
-                            <option value="@brand.Id">@brand.BrandName</option>
-                        }
-                    </select>
-                }
-        </div>
-        <button type="submit" class="px-5 btn btn-outline-success">Add</button>
-        <br />
+        <EnvanterCreateAndUpdateComponent  envanter="envanter"
+                                           errorText="@errorText"
+                                           operationTitle="Add new envanter item"/>
             <DataAnnotationsValidator />
             <ValidationSummary />
     </EditForm>
-    </div>
-</div>
+    
 @code {
     [Inject]
     NavigationManager navigationManager { get; set; }
@@ -59,19 +18,10 @@
     [Inject]
     ILocalStorageService localStorage { get; set; }
 
-    [Inject]
-    IBrandService brandService { get; set; }
-
-    List<GetBrandsViewModel> brands;
-
     CreateEnvanterCommand envanter = new();
 
     public string errorText = "";
 
-    protected override async Task OnInitializedAsync()
-    {
-        brands = await brandService.GetAll();
-    }
     public async Task Create()
     {
         if (envanter.BrandId == Guid.Empty)
@@ -79,7 +29,7 @@
 
         try
         {
-            envanter.CompanyId =await localStorage.GetCompanyId();
+            envanter.CompanyId = await localStorage.GetCompanyId();
             await envanterService.Create(envanter);
             navigationManager.NavigateTo("/envanterlist");
         }catch(Exception ex)

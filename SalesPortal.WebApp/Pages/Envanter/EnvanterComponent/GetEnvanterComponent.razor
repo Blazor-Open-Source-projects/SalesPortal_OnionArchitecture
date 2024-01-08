@@ -1,20 +1,30 @@
-﻿<div class="card mb-5">
-    <h5 class="card-header">@envanterItem.Name
-    </h5>
-    <div class="text-end">
-        <button class="btn btn btn-outline-info">update</button>
-        <button class="btn btn-outline-danger" @onclick="()=>Delete(envanterItem.Id)">Delete</button>
-    </div>
-    <div class="card-body">
-        <h5 class="card-title">@envanterItem.ENVCode</h5>
-        <p class="card-text">@envanterItem.BrandName  @envanterItem.StockQuantity</p>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
+﻿ <div class="container">
+        <div class="row">
+            <div class="col-12">
+            <div class="card mb-5 ">
+                <h5 class="card-header">@envanterItem.Name
+                </h5>
+                <div class="text-end  mx-3 my-1">
+                    <button class="btn btn btn-outline-info" @onclick="()=>Update(envanterItem.Id)">update</button>
+                    <button class="btn btn-outline-danger" @onclick="()=>Delete(envanterItem.Id)">Delete</button>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">@envanterItem.ENVCode</h5>
+                    <p class="card-text">@envanterItem.BrandName  @envanterItem.StockQuantity</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+            </div>
+      </div>
+
     </div>
 </div>
-
 @code {
+
     [Inject]
     IEnvanterService envanterService { get; set; }
+
+    [Inject]
+    NavigationManager navigationManager { get; set; }
 
     [Parameter]
     public GetEnvantersViewModel envanterItem { get; set; } 
@@ -22,6 +32,10 @@
     public async Task Delete(Guid id)
     {
         var result = await envanterService.Delete(id);
-        StateHasChanged();
     }  
+
+    public async Task Update(Guid id)
+    {
+        navigationManager.NavigateTo($"/envanter/{id}");
+    }
 }
