@@ -1,0 +1,38 @@
+﻿@if(products != null)
+{
+    @foreach (var product in products.Results)
+    {
+        <GetEProductComponent product="product" />
+    }
+
+    <br />
+    <br />
+    <br />
+    <br />
+
+
+    <PaginationComponent TotalPage="@products.PageInfo.TotalPageCount"
+                         CurrentPage="@CurrentPage"
+                         OnPageChanged="@OnPageChanged" />
+}
+
+
+@code {
+    [Inject]
+    IProductService productService { get; set; }
+    private int CurrentPage = 1;
+
+    PagedViewModel<GetProductViewModel> products;
+
+    public async Task OnPageChanged(int pageNumber)
+    {
+        CurrentPage = pageNumber;
+        products = await productService.GetProducts(CurrentPage, 5);
+    }
+
+    protected override  async Task OnInitializedAsync()
+    {
+        products = await productService.GetProducts(1, 5);
+
+    }
+}

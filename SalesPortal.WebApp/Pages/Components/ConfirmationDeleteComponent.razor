@@ -1,0 +1,19 @@
+﻿<div class="row">
+    <div class="col-md-6 text-start">
+        <button type="button" class="btn btn-outline-secondary" @onclick=Cancel>Cancel</button>
+    </div>
+    <div class="col-md-6 text-end ">
+        <button type="button" class="btn btn-outline-danger" @onclick=Continue>Delete</button>
+    </div>
+</div>
+@code {
+    [CascadingParameter] BlazoredModalInstance ModalInstance { get; set; }
+    public void Cancel()
+    {
+        ModalInstance.CancelAsync();
+    }
+    public void Continue()
+    {
+        ModalInstance.CloseAsync();
+    }
+}

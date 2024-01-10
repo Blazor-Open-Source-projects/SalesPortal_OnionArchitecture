@@ -1,0 +1,56 @@
+﻿<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <div class="card mb-5 ">
+                <h5 class="card-header">
+                    @product.Name
+                </h5>
+                <div class="text-end  mx-3 my-1">
+                    <button class="btn btn btn-outline-info" @onclick="()=>Update(product.Id)">update</button>
+                    <button class="btn btn-outline-danger" @onclick="()=>Delete(product.Id)">Delete</button>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Category name: @product.CategoryName</h5>
+                    <p class="card-text">Description = @product.Description </p>
+                    <a  class="btn btn-primary">@product.Price $</a>
+                </div>
+                <div class="card-body bg-light">
+                    <div class="col-8">
+                        <h4 class="mb-3 text-dark">Sales Units</h4>
+                        @foreach (var salesUnit in product.SalesUnits)
+                        {
+                            <h5 class="card-title">Sales Unit's Name: @salesUnit.Name</h5>
+                            <p class="card-text">@salesUnit.Package package and each package has: @salesUnit.Quantity item
+                            so total quanity is: @TotalUnitItemCalculate(@salesUnit.Package,@salesUnit.Quantity)</p>
+                            <a class="btn btn-primary">@salesUnit.Price</a>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+@code {
+    [Parameter]
+    public GetProductViewModel product { get; set; }
+
+    [Inject]
+    NavigationManager navigationManager{ get; set; }
+
+    public void Update(Guid id)
+    {
+        navigationManager.NavigateTo($"/product({id}");
+    }
+
+    public void Delete(Guid id)
+    {
+        navigationManager.NavigateTo("");
+    }
+
+    public int TotalUnitItemCalculate(int quantity, int package)
+    {
+        return (quantity * package);
+    }
+
+}

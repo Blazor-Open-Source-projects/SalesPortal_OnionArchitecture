@@ -21,7 +21,9 @@ public class GetEnvanterByIdQueryHandler : IRequestHandler<GetEnvanterByIdQuery,
     public async Task<CreateEnvanterCommand> Handle(GetEnvanterByIdQuery request, CancellationToken cancellationToken)
     {
         var dbData = await envaterRepository.GetByIdAsync(request.EnvanterId);
-        
+
+        if (dbData is null)
+            throw new DatabaseValidationException("Envanter does not exists");
         if(request.CompanyId != dbData.CompanyId)
             throw new DatabaseValidationException("You are not allowed to see this item");
         

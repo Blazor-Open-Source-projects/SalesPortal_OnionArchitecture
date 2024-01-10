@@ -29,9 +29,12 @@ namespace SalesPortal.Api.Persistence.WebApi.Controller
         }
 
         [HttpPost]
-        [Route("update/{companyId}")]
-        public async Task<IActionResult> Update(Guid companyId,UpdateEnvanterCommand command)
+        [Route("update/{envanterId}")]
+        public async Task<IActionResult> Update(Guid companyId,Guid envanterId, UpdateEnvanterCommand command)
         {
+            companyId = CompanyId.Value;
+            command.Id = envanterId;
+            command.CompanyId = CompanyId.Value;
             var result = await mediator.Send(command);
 
             return Ok(result);

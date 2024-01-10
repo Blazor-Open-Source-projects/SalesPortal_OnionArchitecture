@@ -18,14 +18,45 @@
     private CreateEnvanterCommand envanter = new();
     [Inject]
     IEnvanterService envanterService{ get; set; }
+    [Inject]
+    NavigationManager navigationManager{ get; set; }
 
     protected async override Task OnInitializedAsync()
     {
-        envanter = await envanterService.GetEnvanter(id);
+        try
+        {
+            envanter = await envanterService.GetEnvanter(id);
+
+        }catch(Exception ex)
+        {
+            
+            errorText = ex.Message;
+            Console.WriteLine(errorText);
+        }
     }
 
     public async Task Update()
     {
-        
+        UpdateEnvanterCommand command = new();
+        command.StockQuantity = envanter.StockQuantity;
+        command.Name = envanter.Name;
+        command.BrandId = envanter.BrandId;
+        command.ENVCode = envanter.ENVCode;
+
+        bool response = false;
+        try
+        {
+            response = await envanterService.Update(id, command);
+        }
+        catch(Exception ex)
+        {
+            errorText = ex.Message;
+        }
+
+        if (response == true)
+        {
+            navigationManager.NavigateTo("/envanterlist");
+        }
+
     }
 }

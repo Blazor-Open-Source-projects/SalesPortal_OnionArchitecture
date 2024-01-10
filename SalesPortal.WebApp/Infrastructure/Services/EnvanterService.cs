@@ -1,8 +1,11 @@
-﻿using SalesPortal.Common.Models.Page;
+﻿using SalesPortal.Common.Infrastructure.Exceptions;
+using SalesPortal.Common.Infrastructure.Results;
+using SalesPortal.Common.Models.Page;
 using SalesPortal.Common.Models.Queries;
 using SalesPortal.Common.Models.RequestModels;
 using SalesPortal.WebApp.Infrastructure.Services.Interfaces;
 using System.Net.Http.Json;
+using System.Text.Json;
 
 namespace SalesPortal.WebApp.Infrastructure.Services;
 
@@ -40,8 +43,22 @@ public class EnvanterService : IEnvanterService
 
     public async Task<CreateEnvanterCommand> GetEnvanter(Guid id)
     {
-        var res = await httpClient.GetFromJsonAsync<CreateEnvanterCommand>($"/api/Envanter/{id}");
-        return res;
+        string responseStr;
+        var httpResponse = await httpClient.GetAsync($"/api/Envanter/{id}");
+        
+
+        if (httpResponse != null && !httpResponse.IsSuccessStatusCode)
+        {
+
+                var res = await httpResponse.Content.ReadFromJsonAsync<ValidationResponseModel>();
+                responseStr = res.FlattenErrors;
+                throw new DatabaseValidationException(responseStr);
+        }
+
+        responseStr = await httpResponse.Content.ReadAsStringAsync();
+        var response = JsonSerializer.Deserialize<CreateEnvanterCommand>(responseStr);
+
+        return response;
     }
 
     public async Task<PagedViewModel<GetEnvantersViewModel>> GetEnvaters(int page, int pageSize)
@@ -50,12 +67,14 @@ public class EnvanterService : IEnvanterService
         return result;
     }
 
-    public async Task<bool> Update(UpdateEnvanterCommand command)
+    public async Task<bool> Update(Guid envanterId, UpdateEnvanterCommand command)
     {
-        var result = await httpClient.PostAsJsonAsync<UpdateEnvanterCommand>("/api/envanter/update", command);
+        var res = await httpClient.PostAsJsonAsync<UpdateEnvanterCommand>($"/api/envanter/update/{envanterId}", command);
 
-        if(!result.IsSuccessStatusCode)
-                return false;
+        if (!res.IsSuccessStatusCode)
+        {
+            return false;
+        }
 
         return true;
     }
