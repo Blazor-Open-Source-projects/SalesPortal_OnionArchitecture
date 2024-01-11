@@ -49,12 +49,23 @@ namespace SalesPortal.Api.Persistence.WebApi.Controller
         }
 
         [HttpGet("{productId}")]
-        public async Task<IActionResult> GetProductByI(Guid productId, Guid companyId)
+        public async Task<IActionResult> GetProductById(Guid productId, Guid companyId)
         {
             companyId = CompanyId.Value;
             var res = await mediator.Send(new GetProductByIdQuery(productId,companyId));
 
             return Ok(res);
+        }
+
+
+        [HttpPost("update")]
+        public async Task<IActionResult> UpdateProduct(UpdateProductCommand command)
+        {
+            command.CompanyId = CompanyId.Value;
+            var res = await mediator.Send(command);
+
+            return Ok(res);
+
         }
     }
 }

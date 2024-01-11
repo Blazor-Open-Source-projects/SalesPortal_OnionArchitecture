@@ -1,7 +1,19 @@
 ﻿@page "/productlist"
-
+<h3>Products</h3>
+<div class="position-relative">
+    <div class="position-absolute top-1 end-0">
+        <button type="button" class="btn btn-success" @onclick=@Navigate>Create</button>
+    </div>
+</div>
+<br />
+<br />
 <ProductListComponent />
 
 @code {
-
+    [Inject]
+    NavigationManager navigationManager { get; set; }
+    private void Navigate()
+    {
+        navigationManager.NavigateTo("/product/create");
+    }
 }

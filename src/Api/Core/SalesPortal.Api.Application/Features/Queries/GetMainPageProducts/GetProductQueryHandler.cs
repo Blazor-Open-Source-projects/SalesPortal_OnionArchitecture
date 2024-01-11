@@ -32,6 +32,7 @@ public class GetProductQueryHandler : IRequestHandler<GetProductQuery, PagedView
 
         var list = query.Select(i => new GetProductViewModel()
         {
+                Id = i.Id,
                 CategoryName = i.Category.Name,
                 Description = i.Description,
                 Name = i.Name,
